@@ -16,7 +16,7 @@ public class StudentManager {
   //学生情報の削除
   public  void deleteStudent(String name) {
     //学生情報があれば正常に実行
-    if(isFindStudent(name)){
+    if(existStudent(name)){
       studentList.removeIf(studentName
           -> studentName.getName().equals(name));
     }else{
@@ -27,7 +27,7 @@ public class StudentManager {
   //点数の更新
   public void updateScore(String name, int score){
     //学生情報があれば正常に実行
-    if(isFindStudent(name)){
+    if(existStudent(name)){
       studentList.stream()
           .filter(student -> student.getName().equals(name))
           .forEach(student -> student.setScore(score));
@@ -62,10 +62,10 @@ public class StudentManager {
   }
 
   //学生情報がリスト内にあればTrue、なければFalse
-  public boolean isFindStudent(String name) {
-    List<Student> isFindStudent = studentList.stream()
+  public boolean existStudent(String name) {
+    List<Student> existStudent = studentList.stream()
         .filter(student -> student.getName().equals(name))
         .toList();
-    return !isFindStudent.isEmpty();
+    return !existStudent.isEmpty();
   }
 }
