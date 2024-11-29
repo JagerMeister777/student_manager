@@ -13,19 +13,17 @@ public class Main {
 
     boolean isFinish = false;
 
-    //「6:プログラム終了」が選ばれたらループ処理を終了
+    //「6:プログラム終了」が選ばれたらisFinishがtrueになり、ループ処理を終了
     while (!isFinish) {
 
       //メニューの選択
       String selectMode = Message.selectMenu();
 
+      //境界線
       Message.printLine();
 
-      //selectModeが数字かどうかチェックする
-      boolean isNumber = checkNumber(selectMode);
-
-      //selectModeが数字なら正常に実行
-      if (isNumber) {
+      //selectModeが数値なら正常に実行
+      if (isNumber(selectMode)) {
         switch (Integer.parseInt(selectMode)) {
           //学生情報の追加
           case 1 -> {
@@ -34,12 +32,9 @@ public class Main {
             System.out.print(name + "の点数を入力してください: ");
             String score = scanner.next();
 
-            //点数が数値で入力されているか
-            isNumber = checkNumber(score);
-
-            //数値の場合、正常に実行
-            if (isNumber){
-              studentManager.createStudent(name, Integer.parseInt(score));
+            //scoreが数値なら正常に実行
+            if (isNumber(score)){
+              studentManager.addStudent(name, Integer.parseInt(score));
             }else{
               System.out.println("入力が正しくありません。点数は数値を入力してください。");
             }
@@ -59,11 +54,8 @@ public class Main {
             System.out.print(studentName + "の新しい点数を入力してください: ");
             String score = scanner.next();
 
-            //点数が数値で入力されているか
-            isNumber = checkNumber(score);
-
             //scoreが数値なら正常に実行
-            if (isNumber){
+            if (isNumber(score)){
               studentManager.updateScore(studentName, Integer.parseInt(score));
             }else{
               System.out.println("入力が正しくありません。点数は数値を入力してください。");
@@ -95,8 +87,8 @@ public class Main {
     }
   }
 
-  //数字かどうかチェックする
-  public static boolean checkNumber(String number) {
+  //数値かどうかチェックする
+  public static boolean isNumber(String number) {
     try {
       //文字列を整数に変換して例外が起こればcatchへ
       Integer.parseInt(number);

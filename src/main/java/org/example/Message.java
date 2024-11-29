@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Message {
 
   public static String selectMenu(){
-
     Scanner scanner = new Scanner(System.in);
     printLine();
     System.out.println("1. 学生を追加");
@@ -16,8 +15,7 @@ public class Message {
     System.out.println("6. 終了");
     printLine();
     System.out.print("選択してください: ");
-    return scanner.nextLine();
-
+    return scanner.next();
   }
 
   //見やすいように境界線を引く

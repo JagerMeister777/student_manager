@@ -8,17 +8,16 @@ public class StudentManager {
   List<Student> studentList = new ArrayList<>();
 
   //学生情報の追加
-  public void createStudent(String name, int score) {
+  public void addStudent(String name, int score) {
     Student student = new Student(name, score);
     studentList.add(student);
   }
 
   //学生情報の削除
-  public  void deleteStudent(String name) {
-    //学生情報があれば正常に実行
+  public void deleteStudent(String name) {
+    //学生情報が一致すれば削除
     if(existStudent(name)){
-      studentList.removeIf(studentName
-          -> studentName.getName().equals(name));
+      studentList.removeIf(studentName -> studentName.getName().equals(name));
     }else{
       Message.notFoundStudent(name);
     }
@@ -26,7 +25,7 @@ public class StudentManager {
 
   //点数の更新
   public void updateScore(String name, int score){
-    //学生情報があれば正常に実行
+    //学生情報があれば点数の更新
     if(existStudent(name)){
       studentList.stream()
           .filter(student -> student.getName().equals(name))
@@ -38,7 +37,7 @@ public class StudentManager {
 
   //平均点の表示
   public void averageScore() {
-    //学生情報があれば正常に実行
+    //学生情報が一つでもあれば平均点を表示
     if (!studentList.isEmpty()) {
       double result = studentList.stream()
           .mapToDouble(Student::getScore)
@@ -51,7 +50,7 @@ public class StudentManager {
 
   //学生一覧
   public void showStudentList() {
-    //学生情報があれば正常に実行
+    //学生情報が一つでもあれば一覧を表示
     if (!studentList.isEmpty()) {
       System.out.println("学生一覧: ");
       studentList.forEach(student
@@ -61,7 +60,7 @@ public class StudentManager {
     }
   }
 
-  //学生情報がリスト内にあればTrue、なければFalse
+  //リスト内に学生情報があればTrue、なければFalse
   public boolean existStudent(String name) {
     List<Student> existStudent = studentList.stream()
         .filter(student -> student.getName().equals(name))
