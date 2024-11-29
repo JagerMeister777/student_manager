@@ -23,7 +23,7 @@ public class Main {
       Message.printLine();
 
       //selectModeが数値なら正常に実行
-      if (isNumber(selectMode)) {
+      if (studentManager.isNumber(selectMode)) {
         switch (Integer.parseInt(selectMode)) {
           //学生情報の追加
           case 1 -> {
@@ -33,7 +33,7 @@ public class Main {
             String score = scanner.next();
 
             //scoreが数値なら正常に実行
-            if (isNumber(score)){
+            if (studentManager.isNumber(score)){
               studentManager.addStudent(name, Integer.parseInt(score));
             }else{
               System.out.println("入力が正しくありません。点数は数値を入力してください。");
@@ -55,7 +55,7 @@ public class Main {
             String score = scanner.next();
 
             //scoreが数値なら正常に実行
-            if (isNumber(score)){
+            if (studentManager.isNumber(score)){
               studentManager.updateScore(studentName, Integer.parseInt(score));
             }else{
               System.out.println("入力が正しくありません。点数は数値を入力してください。");
@@ -63,14 +63,10 @@ public class Main {
           }
 
           //登録している学生の平均点表示
-          case 4 -> {
-            studentManager.averageScore();
-          }
+          case 4 -> studentManager.averageScore();
 
           //学生情報一覧
-          case 5 -> {
-            studentManager.showStudentList();
-          }
+          case 5 -> studentManager.showStudentList();
 
           //プログラム終了
           case 6 -> {
@@ -84,17 +80,6 @@ public class Main {
       }else{
         System.out.println("入力が正しくありません。1〜6で選択してください。");
       }
-    }
-  }
-
-  //数値かどうかチェックする
-  public static boolean isNumber(String number) {
-    try {
-      //文字列を整数に変換して例外が起こればcatchへ
-      Integer.parseInt(number);
-      return true;
-    } catch (NumberFormatException e) {
-      return false;
     }
   }
 }

@@ -67,4 +67,15 @@ public class StudentManager {
         .toList();
     return !existStudent.isEmpty();
   }
+
+  //数値かどうかチェックする
+  public boolean isNumber(String number) {
+    try {
+      //文字列を整数に変換して例外が起こればcatchへ
+      Integer.parseInt(number);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
 }
