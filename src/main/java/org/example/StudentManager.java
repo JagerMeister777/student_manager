@@ -1,5 +1,6 @@
 package org.example;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +38,14 @@ public class StudentManager {
 
   //平均点の表示
   public void averageScore() {
+    //平均点の計算
+    double result = studentList.stream()
+        .mapToDouble(Student::getScore)
+        .average().orElse(0);
+
     //学生情報が一つでもあれば平均点を表示
     if (!studentList.isEmpty()) {
-      double result = studentList.stream()
-          .mapToDouble(Student::getScore)
-          .average().orElse(0);
-      System.out.println("平均点: " + Math.round(result) + "点");
+      System.out.println("平均点: " + formatDouble(result) + "点");
     }else{
       System.out.println("学生情報がありません。");
     }
@@ -58,6 +61,12 @@ public class StudentManager {
     }else{
       System.out.println("学生情報がありません。");
     }
+  }
+
+  // DecimalFormat を使って小数点第1位まで表示
+  public static String formatDouble(double number) {
+    DecimalFormat df = new DecimalFormat("0.#");
+    return df.format(number);
   }
 
   //リスト内に学生情報があればTrue、なければFalse
