@@ -63,7 +63,7 @@ public class StudentManager {
     }
   }
 
-  // DecimalFormat を使って小数点第1位まで表示
+  // DecimalFormatを使って小数点第1位まで表示
   public static String formatDouble(double number) {
     DecimalFormat df = new DecimalFormat("0.#");
     return df.format(number);
